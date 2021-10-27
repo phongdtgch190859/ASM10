@@ -23,39 +23,39 @@ app.post('/update', async (req, res) => {
     const url = req.body.txtURL
     let updateValues = { $set: { name: name, price: price, cat: category, picURL: url } };
 
-    //Kiểm tra tên sản phẩm
-    if(name ==""){
-        let product = {};
-        product.id = id;
-        product.price = price;
-        product.picURL = url;
-        res.render('edit', {product, nameErr: 'Please Enter Product Name!' })
-        return;
-    }
-    //Kiểm tra number có nằm trong khoảng giá trị
-    let error = await checkRangeOfNumber(0,100000,price);
-    if(error != ""){
-        let product = {};
-        product.id = id;
-        product.name = name;
-        product.picURL = url;
-        res.render('edit',{product, priceErr: error });
-        return;
-    }
+    // //Kiểm tra tên sản phẩm
+    // if(name ==""){
+    //     let product = {};
+    //     product.id = _id;
+    //     product.price = price;
+    //     product.picURL = url;
+    //     res.render('edit', {product, nameErr: 'Please Enter Product Name!' })
+    //     return;
+    // }
+    // //Kiểm tra number có nằm trong khoảng giá trị
+    // let error = await checkRangeOfNumber(0,100000,price);
+    // if(error != ""){
+    //     let product = {};
+    //     product.id = _id;
+    //     product.name = name;
+    //     product.picURL = url;
+    //     res.render('edit',{product, priceErr: error });
+    //     return;
+    // }
 
-    //Kiểm tra URL có để trống.
-    if(url == ""){
-        let product = {};
-        product.id = id;
-        product.name = name;
-        product.price = price;
-        res.render('edit', {product, picError: 'Please Enter URL!' })
-        return;
-    }
+    // //Kiểm tra URL có để trống.
+    // if(url == ""){
+    //     let product = {};
+    //     product.id = _id;
+    //     product.name = name;
+    //     product.price = price;
+    //     res.render('edit', {product, picError: 'Please Enter URL!' })
+    //     return;
+    // }
     //Kiểm tra xem url có kết thúc bằng đuôi .png
     if (url.endsWith('.png')==false) {
         let product = {};
-        product.id = id;
+        product.id = _id;
         product.name = name;
         product.price = price;
         res.render('edit', {product, picError: 'The image was not png file!' })

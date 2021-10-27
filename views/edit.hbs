@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit product</title>
+</head>
+<body>
+    <h1>Update Product</h1>
+    <form action="/update" method="post">
+        <input type="hidden" name="txtId" value="{{product._id}}">
+        Name : <input type="text" name="txtName" value="{{product.name}}">
+        <span style="color: red;">{{nameErr}}</span>
+        <Br>
+        Price : <input type="number" min="0" name="txtPrice" value="{{product.price}}">
+        <span style="color: red;">{{priceErr}}</span>
+        <br/>
+        Picture: <input type="text" name="txtURL" value="{{product.picURL}}">
+        <span style="color: red;">{{picError}}</span>
+        {{!-- <span style="color: red;">{{nameErr}}</span> --}}
+        <br>
+        Category: 
+        <select name="txtCategory" id="txtCategory">
+            <option value="Búp Bê">Búp Bê</option>
+            <option value="Lego">Lego</option>
+            <option value="Mô Hình">Mô Hình</option>
+            <option value="Lắp Ráp">Lắp Ráp</option>
+            <option value="Gấu Bông">Gấu Bông</option>
+            <option value="Điều Khiển Từ Xa">Điều Khiển Từ Xa</option>
+        </select>
+        <br/>
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>

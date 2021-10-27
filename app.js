@@ -45,10 +45,17 @@ app.get('/edit/:id', async (req, res) => {
     res.render("edit", { product: productToEdit })
 })
 
+// ngay thang 
+function formatDate(date){
+    return new Date(date).toLocaleString("vi-VN")
+}
+
 app.get('/', async (req, res) => {
     var result = await getAll("Products")
+    var time = new Date().toISOString()
     res.render('home', { products: result })
 })
+
 
 app.get('/allproducts', async (req, res) => {
     var all = await getAll("Products")

@@ -22,47 +22,20 @@ app.post('/update', async (req, res) => {
     const price = req.body.txtPrice
     const url = req.body.txtURL
     let updateValues = { $set: { name: name, price: price, cat: category, picURL: url } };
-
-    // //Kiểm tra tên sản phẩm
-    // if(name ==""){
-    //     let product = {};
-    //     product._id = id;
-    //     product.price = price;
-    //     product.picURL = url;
-    //     res.render('edit', {product, nameErr: 'Please Enter Product Name!' })
-    //     return;
-    // }
-    // //Kiểm tra number có nằm trong khoảng giá trị
-    // let error = await checkRangeOfNumber(0,100000,price);
-    // if(error != ""){
-    //     let product = {};
-    //     product._id = id;
-    //     product.name = name;
-    //     product.picURL = url;
-    //     res.render('edit',{product, priceErr: error });
-    //     return;
-    // }
-
-    // //Kiểm tra URL có để trống.
-    // if(url == ""){
-    //     let product = {};
-    //     product._id = id;
-    //     product.name = name;
-    //     product.price = price;
-    //     res.render('edit', {product, picError: 'Please Enter URL!' })
-    //    return;
-    //}
-    //Kiểm tra xem url có kết thúc bằng đuôi .png
-    // console.log("Check png")
-    // console.log(url.endsWith('png'))
-
-    if (url.endsWith('.png') == false) {
-        const productToEdit = await getDocumentById(idValue, "Products")
-        res.render('edit', {picError: 'Please Enter URL Again!', product: productToEdit })
+    //Kiểm tra URL có để trống.
+    if(url == ""){
+        let product = {};
+        product._id = id;
+        product.name = name;
+        product.price = price;
+        res.render('edit', {product, picError: 'Please Enter URL!' })
+       return;
     }
-    await updateDocument(id, updateValues, "Products")
-    res.redirect('/')
-})
+
+    else {
+        await updateDocument(id, updateValues, "Products")
+        res.redirect('/')
+    }})
 
 app.get('/edit/:id', async (req, res) => {
     const idValue = req.params.id

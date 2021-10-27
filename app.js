@@ -26,7 +26,7 @@ app.post('/update', async (req, res) => {
     // //Kiểm tra tên sản phẩm
     // if(name ==""){
     //     let product = {};
-    //     product.id = _id;
+    //     product._id = id;
     //     product.price = price;
     //     product.picURL = url;
     //     res.render('edit', {product, nameErr: 'Please Enter Product Name!' })
@@ -36,7 +36,7 @@ app.post('/update', async (req, res) => {
     // let error = await checkRangeOfNumber(0,100000,price);
     // if(error != ""){
     //     let product = {};
-    //     product.id = _id;
+    //     product._id = id;
     //     product.name = name;
     //     product.picURL = url;
     //     res.render('edit',{product, priceErr: error });
@@ -46,35 +46,23 @@ app.post('/update', async (req, res) => {
     // //Kiểm tra URL có để trống.
     // if(url == ""){
     //     let product = {};
-    //     product.id = _id;
+    //     product._id = id;
     //     product.name = name;
     //     product.price = price;
     //     res.render('edit', {product, picError: 'Please Enter URL!' })
-    //     return;
-    // }
+    //    return;
+    //}
     //Kiểm tra xem url có kết thúc bằng đuôi .png
-    if (url.endsWith('.png')==false) {
-        let product = {};
-        product.id = _id;
-        product.name = name;
-        product.price = price;
-        res.render('edit', {product, picError: 'The image was not png file!' })
-        return;
-    } else {
-        await updateDocument(id, updateValues, "Products")
-        res.redirect('/')
+    // console.log("Check png")
+    // console.log(url.endsWith('png'))
+
+    if (url.endsWith('.png') == false) {
+        const productToEdit = await getDocumentById(idValue, "Products")
+        res.render('edit', {picError: 'Please Enter URL Again!', product: productToEdit })
     }
-        // if (url.length == 0) {
-        //     var result = await getAll("Products")
-        //     res.render('edit', { products: result, picError: 'Phai nhap Picture!' })
-        // } else {
-        //     //xay dung doi tuong insert
-        //     const obj = { name: name, price: price, picURL: url, cat: category }
-        //     //goi ham de insert vao DB
-        //     await updateDocument(id, updateValues, "Products")
-        //     res.redirect('/')
-        // };
-    })
+    await updateDocument(id, updateValues, "Products")
+    res.redirect('/')
+})
 
 app.get('/edit/:id', async (req, res) => {
     const idValue = req.params.id

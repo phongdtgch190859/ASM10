@@ -53,7 +53,8 @@ function formatDate(date){
 app.get('/', async (req, res) => {
     var result = await getAll("Products")
     var time = new Date().toISOString()
-    res.render('home', { products: result })
+    console.log(time)
+    res.render('home', { products: result, now: time})
 })
 
 
@@ -170,31 +171,3 @@ console.log('Server is running!')
 
 
 
-
-
-// app.post('/insert', async (req, res) => {
-//     const name = req.body.txtName
-//     const category = req.body.txtCategory;
-//     const price = req.body.txtPrice
-//     const url = req.body.txtURL;
-//     console.log(name)
-//     console.log(name.startsWith('aka'))
-//     console.log(url.length)
-//     if (name.startsWith('aka')==false || url.length == 0){
-//         var result = await getAll("Products")
-//         q = {
-//             products: result,
-//             nameErr: '',
-//             picError: ''
-//         }
-//         if(name.startsWith('aka')==false) q.nameErr =  'enter name again!!';
-//         if(url.length == 0) q.picError = 'Phai nhap Picture!';
-//         res.render('home', q);
-//     } else {
-//         //xay dung doi tuong insert
-//         const obj = { name: name, price: price, picURL: url, cat: category }
-//         //goi ham de insert vao DB
-//         await insertToDB(obj,  "Products")
-//         res.redirect('/')
-//     }
-// })

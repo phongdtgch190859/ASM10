@@ -112,19 +112,3 @@ module.exports = {insertToDB,getAll,deleteObject,getDocumentById,updateDocument,
 
 
 
-// async function checkRangeOfNumber(min, max, numberCheck){
-//     let minNumber = parseFloat(min);
-//     let maxNumber = parseFloat(max);
-//     let checkNumber = parseFloat(numberCheck);
-//     if(isNaN(minNumber) || isNaN(maxNumber) || isNaN(checkNumber)){
-//         return "The value was not a number";
-//     }
-//     else{
-//         if(checkNumber < minNumber || checkNumber > maxNumber){
-//             return "The value was out of range ["+minNumber+", "+maxNumber+"]";
-//         }
-//         else{
-//             return "";
-//         }
-//     }
-// }

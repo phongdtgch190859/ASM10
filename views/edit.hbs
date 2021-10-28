@@ -11,13 +11,11 @@
     <form action="/update" method="post">
         <input type="hidden" name="txtId" value="{{product._id}}">
         Name : <input type="text" name="txtName" value="{{product.name}}">
-        <span style="color: red;">{{nameErr}}</span>
         <Br>
         Price : <input type="number" min="0" name="txtPrice" value="{{product.price}}">
         <span style="color: red;">{{priceErr}}</span>
         <br/>
         Picture: <input type="text" name="txtURL" value="{{product.picURL}}">
-        <span style="color: red;">{{picError}}</span>
         {{!-- <span style="color: red;">{{nameErr}}</span> --}}
         <br>
         Category: 

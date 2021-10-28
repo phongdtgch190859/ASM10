@@ -1,5 +1,5 @@
 const express = require('express')
-const { insertToDB, getAll, deleteObject, getDocumentById, updateDocument, findProductsByCategory, findProductsByProductName, checkRangeOfNumber } = require('./databaseHandler')
+const { insertToDB, getAll, deleteObject, getDocumentById, updateDocument, findProductsByCategory, findProductsByProductName, checkPrice} = require('./databaseHandler')
 const app = express()
 
 app.set('view engine', 'hbs')
@@ -22,15 +22,25 @@ app.post('/update', async (req, res) => {
     const price = req.body.txtPrice
     const url = req.body.txtURL
     let updateValues = { $set: { name: name, price: price, cat: category, picURL: url } };
-    //Kiểm tra URL có để trống.
-    if(url == ""){
+    //Kieemr  tra gia tri price 
+    let error = await checkPrice(10,30,price);
+    if (error != ""){
         let product = {};
         product._id = id;
         product.name = name;
-        product.price = price;
-        res.render('edit', {product, picError: 'Please Enter URL!' })
-       return;
+        product.picURL = url;
+        res.render('edit', {product, priceErr: error});
+        return;
     }
+    //Kiểm tra URL có để trống.
+    // if(price == ""){
+    //     let product = {};
+    //     product._id = id;
+    //     product.name = name;
+    //     product.price = price;
+    //     res.render('edit', {product, picError: 'Please Enter URL!' })
+    //    return;
+    // }
     else {
         await updateDocument(id, updateValues, "Products")
         res.redirect('/')

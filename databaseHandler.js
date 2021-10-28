@@ -54,9 +54,25 @@ async function deleteObject(id,collectionName){
     await dbo.collection(collectionName).deleteOne({_id:ObjectId(id)})
 }
 
+async function checkPrice(min,max,checkprice){
+    let minNum = parseFloat(min);
+    let maxNum = parseFloat(max);
+    let pricecheck = parseFloat(checkprice);
+    if(isNaN(minNum) || isNaN(maxNum) || isNaN(pricecheck) ){
+        return"Thevalue was not a Number";
+    }
+    else{
+        if(pricecheck < minNum || pricecheck > maxNum){
+            return"The value was out of price["+minNum+","+maxNum+"]";
+        }
+        else {
+            return"";
+        }
+    }
+}
 
 
-module.exports = {insertToDB,getAll,deleteObject,getDocumentById,updateDocument, findProductsByCategory, findProductsByProductName}
+module.exports = {insertToDB,getAll,deleteObject,getDocumentById,updateDocument, findProductsByCategory, findProductsByProductName, checkPrice}
 
 
 

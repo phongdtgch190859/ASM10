@@ -83,7 +83,7 @@ app.post('/insert', async (req, res) => {
         res.render('home', { products: result, picError: 'Phai nhap Picture!' })
     } else {
         //xay dung doi tuong insert
-        const obj = { name: name, price: price, picURL: url, cat: category }
+        const obj = { name: name, price: price, picURL: url, cat: category}
         //goi ham de insert vao DB
         await insertToDB(obj, "Products")
         res.redirect('/')

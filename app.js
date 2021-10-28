@@ -31,7 +31,6 @@ app.post('/update', async (req, res) => {
         res.render('edit', {product, picError: 'Please Enter URL!' })
        return;
     }
-
     else {
         await updateDocument(id, updateValues, "Products")
         res.redirect('/')

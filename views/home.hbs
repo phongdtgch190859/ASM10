@@ -1,181 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./public/css/css.css">
-    <title>ATN_Shop</title>
-    {{!-- //css --}}
-    <style>
-        @-webkit-keyframes my {
-            0% {
-                color: #F8CD0A;
-            }
-
-            50% {
-                color: #fff;
-            }
-
-            100% {
-                color: #F8CD0A;
-            }
-        }
-
-        @-moz-keyframes my {
-            0% {
-                color: #F8CD0A;
-            }
-
-            50% {
-                color: #fff;
-            }
-
-            100% {
-                color: #F8CD0A;
-            }
-        }
-
-        @-o-keyframes my {
-            0% {
-                color: #F8CD0A;
-            }
-
-            50% {
-                color: #fff;
-            }
-
-            100% {
-                color: #F8CD0A;
-            }
-        }
-
-        @keyframes my {
-            0% {
-                color: #F8CD0A;
-            }
-
-            50% {
-                color: #fff;
-            }
-
-            100% {
-                color: #F8CD0A;
-            }
-        }
-
-        .test {
-            background: #3d3d3d;
-            font-size: 24px;
-            font-weight: bold;
-            -webkit-animation: my 700ms infinite;
-            -moz-animation: my 700ms infinite;
-            -o-animation: my 700ms infinite;
-            animation: my 700ms infinite;
-            text-align: center;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+   
 </head>
-
 <body>
-    <header>
-        <h1 class="test">Bin_Shop</h1>
-        <h2><a href='/'>Home</a></h2>
-        <h2><a href="/allproducts">All-Products</a></h2>
-        <hr>
-        {{now}}
-        <script>alert('Welcome to my page!!')</script>
-        <img src="img/main.jpg" alt="Cat" width="100%">
-
-    </header>
-    <main>
-        <hr>
-        <div style="width: 50%;">
-            <form action="/insert" method="post">
-                <div style="padding: 10px 0;">
-                    <label style="width: 20%;" for="txtName"> Product Name</label>
-                    <input type="text" name="txtName" id="txtName">
-                    <span style="color: red;">{{nameErr}}</span>
+     <div class="app">
+       <header>
+    <div class="container bg-info">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            {{!-- <div class="logo"><img src="../img/logo.png" alt=""></div> --}}
+            <h2>ATN STORE</h2>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ml-3" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                  
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Edit
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/create">Create</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/allproducts">Management products</a>
+                         
+                        </div>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+                <div class="d-flex justify-content-between">
+                    <form class="form-inline my-2 my-lg-0" action="/search" method="get">
+                        <input class="form-control mr-sm-2" type="text" name="name"  id="search-input"  placeholder="Search here">
+                        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    <div class="cart ml-4">
+                        <i class="fas fa-shopping-cart"></i>
+                        <sub>2</sub>
+                    </div>
                 </div>
-                <div style="padding: 10px 0;">
-                    <label style="width: 20%;" for="txtPrice"> Price</label>
-                    <input type="text" name="txtPrice" id="txtPrice">
-                </div>
-                <div style="padding: 10px 0;">
-                    <label style="width: 20%;" for="txtCategory"> Category</label>
-                    <select name="txtCategory" id="txtCategory">
-                        <option value="Búp Bê">Búp Bê</option>
-                        <option value="Lego">Lego</option>
-                        <option value="Mô Hình">Mô Hình</option>
-                        <option value="Lắp Ráp">Lắp Ráp</option>
-                        <option value="Gấu Bông">Gấu Bông</option>
-                        <option value="Điều Khiển Từ Xa">Điều Khiển Từ Xa</option>
-                    </select>
-                </div>
-                <div style="padding: 10px 0;">
-                    <label style="width: 20%;" for="txtURL"> Picture</label>
-                    <input type="text" name="txtURL" id="txtURL">
-                    <span style="color: red;">{{picError}}</span>
-                </div>
-                <input style="margin-left: 20.5%;" type="submit" class="btn btn-primary" value="Insert">
-            </form>
-            <hr>
-            <form action="/searchByCategory" method="post">
-                <div>
-                    <label for="txtCategory"> Category</label>
-                    <select name="txtCategory" id="txtCategory">
-                        <option value="all">All</option>
-                        <option value="Búp Bê">Búp Bê</option>
-                        <option value="Lego">Lego</option>
-                        <option value="Mô Hình">Mô Hình</option>
-                        <option value="Lắp Ráp">Lắp Ráp</option>
-                        <option value="Gấu Bông">Gấu Bông</option>
-                        <option value="Điều Khiển Từ Xa">Điều Khiển Từ Xa</option>
-                    </select>
-                </div>
-                <input type="submit" class="btn btn-primary" value="Search by category">
-            </form>
-            <hr>
-            <form action="/searchByProductName" method="post">
-                <div>
-                    <label for="txtName"> Product Name</label>
-                    <input type="text" name="txtName" id="txtName">
-                </div>
-                <input type="submit" class="btn btn-primary" value="Search by product name">
-            </form>
+            </div>
+        </nav>
+    </div>
+</header>
+        <div class="container">
+         
+   <div class="mt-4">
+	<div class="row">
+		{{#each this.products}}
+		<div class="col-sm-6 col-lg-4">
+			<div class="card" >
+				{{!-- <a href="/toys/{{this.slug}}"> --}}
+				<img class="card-img-top" src=" {{picURL}} " alt="{{name}}">
+				</a>
+				<div class="card-body">
+					{{!-- <a href="/toys/{{this.slug}}"> --}}
+					<h5 class="card-title">{{name}}</h5>
+					</a>
+					<h5 class="card-title formatPrice">{{price}}</h5>
+					<h5 class="card-title">{{cat}}</h5>
+					<a href="#" class="btn btn-primary">Buy</a>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+	</div>
+</div>
+<script>
+	var valuePrice = document.querySelectorAll('.formatPrice')
+	valuePrice.forEach(element=>{
+		element.innerHTML = formatCash(element.innerHTML) + " vnđ";
+	})
+	function formatCash(str) {
+		//9000 ['9', '0', '0', '0'] => ['0', '0', '0', '9']
+        return str.split('').reverse().reduce((prev, next, index) => {
+            return ((index % 3) ? next : (next + ',')) + prev
+        })
+    }
+</script>	
         </div>
+        <div class="mt-4">
+    <footer class="bg-secondary text-center ">
+    <p>1644-GCH0901-DOTHANHPHONG-GCH190859</p>
+    </footer>
+</div>
 
-        <hr>
-        <table border="1" width="50%">
-            <tr>
-                <td>id</td>
-                <td>Name</td>
-                <td>Price</td>
-                <td>Category</td>
-                <Td>Picture</Td>
-                <td>Edit</td>
-                <td>Delete</td>
-            </tr>
-            {{#each products}}
-            <tr>
-                <td>
-                   {{_id}}
-                </td>
-                <td>{{name}}</td>
-                <td>{{price}}</td>
-                <td>{{cat}}</td>
-                <Td><img src="{{picURL}}" width="120" height="100" /></Td>
-                <td>
-                    <a href="/edit/{{_id}}">Edit</a>
-                </td>
-                <td> <a onclick="return confirm('Are your sure? to want to delete product ID:{{_id}}')" href="/delete/{{_id}}"> delete</a></td>
-            </tr>
-            {{/each}}
-        </table>
-    </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src='../js/main.js'></script>
 </body>
-<footer></footer>
 
 </html>

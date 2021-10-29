@@ -15,6 +15,8 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 app.use(express.static('public'))
 app.use('/img', express.static(__dirname + 'public/images'))
 
+
+
 app.post('/update', async (req, res) => {
     const id = req.body.txtId
     const name = req.body.txtName
@@ -98,7 +100,11 @@ app.get('/delete/:id', async (req, res) => {
     await deleteObject(idValue, "Products")
     res.redirect('/')
 })
-app.post('/insert', async (req, res) => {
+
+app.get('/create',(req,res)=>{
+    res.render('create')
+})
+app.post('/create', async (req, res) => {
     const name = req.body.txtName
     const category = req.body.txtCategory;
     const price = req.body.txtPrice

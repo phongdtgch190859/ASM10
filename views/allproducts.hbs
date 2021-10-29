@@ -1,17 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Bin_Shop</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+   
 </head>
-
 <body>
-    <h1 class="test">Bin_Shop</h1>
+     <div class="app">
+       <header>
+    <div class="container bg-info">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="logo"><img src="../img/logo.png" alt=""></div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ml-3" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Edit
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/create">Create</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/edit">Management products</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">logout</a>
+                        </div>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+                <div class="d-flex justify-content-between">
+                    <form class="form-inline my-2 my-lg-0" action="/search" method="get">
+                        <input class="form-control mr-sm-2" type="text" name="name"  id="search-input"  placeholder="Search here">
+                        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    <div class="cart ml-4">
+                        <i class="fas fa-shopping-cart"></i>
+                        <sub>2</sub>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+        <div class="container">
+{{!-- 
+<body>
+    {{!-- <h1 class="test">Bin_Shop</h1>
     <h2><a href='/'>Home</a></h2>
           <form action="/searchByProductName" method="post">
             <div >
@@ -19,29 +66,43 @@
                 <input type="text"  name="txtName" id="txtName">
             </div>
             <input type="submit" class="btn btn-primary" value="Search by product name">
-        </form>
-    </form>
+        </form> --}}
+    {{!-- </form>
     <hr>
-    </div> -->
-    <hr>
-    <table border="1" width="50%">
-        <tr>
-            <td>id</td>
-            <td>Name</td>
-            <td>Price</td>
-            <td>Category</td>
-            <Td>Picture</Td>
-        </tr>
-        {{#each this.products}}
-        <tr>
-            <td>{{_id}}</td>
-            <td>{{name}}</td>
-            <td>{{price}}</td>
-            <td>{{cat}}</td>
-            <td><img src="{{picURL}}" width="120" height="100" /></td>
-        </tr>
-        {{/each}}
-    </table>
-</body>
+    </div> --> --}} --}}
+<div class="mt-4">
+    <h2>My Products</h2>
+     <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Name</th>
+                <th scope="col">price</th>
+                <th scope="col">Category</th>
+                <th scope="col">Picture</th>
+            </tr>
+        </thead>
+        <tbody>
+             {{#each this.products}}
+            <tr>
+                <th scope="col">{{_id}}</th>
+                <td scope="col">{{name}}</td>
+                <td scope="col">{{price}}</td>
+                <td scope="col">{{cat}}</td>
+                <td><img src="{{picURL}}" width="120" height="100" /></td>
+                <td>
+                      <a href="/toys/{{_id}}/edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                   
+                      <a href="/toys/{{_id}}/delete"
+                                    onclick="return confirm('Are you sure to delete this record ?');"><i
+                                        class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            {{/each}}
+            
+      
+  
+
+
 
 </html>

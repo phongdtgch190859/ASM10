@@ -156,11 +156,12 @@
                 <td>Category</td>
                 <Td>Picture</Td>
                 <td>Edit</td>
+                <td>Delete</td>
             </tr>
             {{#each products}}
             <tr>
                 <td>
-                    <a onclick="return confirm('Are your sure?')" href="/delete/{{_id}}"> {{_id}}</a>
+                   {{_id}}
                 </td>
                 <td>{{name}}</td>
                 <td>{{price}}</td>
@@ -169,6 +170,7 @@
                 <td>
                     <a href="/edit/{{_id}}">Edit</a>
                 </td>
+                <td> <a onclick="return confirm('Are your sure?')" href="/delete/{{_id}}"> delete</a></td>
             </tr>
             {{/each}}
         </table>

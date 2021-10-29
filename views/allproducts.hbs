@@ -56,20 +56,7 @@
     </div>
 </header>
         <div class="container">
-{{!-- 
-<body>
-    {{!-- <h1 class="test">Bin_Shop</h1>
-    <h2><a href='/'>Home</a></h2>
-          <form action="/searchByProductName" method="post">
-            <div >
-                <label  for="txtName"> Product Name</label>
-                <input type="text"  name="txtName" id="txtName">
-            </div>
-            <input type="submit" class="btn btn-primary" value="Search by product name">
-        </form> --}}
-    {{!-- </form>
-    <hr>
-    </div> --> --}} --}}
+
 <div class="mt-4">
     <h2>My Products</h2>
      <table class="table">
@@ -93,7 +80,7 @@
                 <td>
                       <a href="/toys/{{_id}}/edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                    
-                      <a href="/toys/{{_id}}/delete"
+                      <a href="/delete/{{_id}}"
                                     onclick="return confirm('Are you sure to delete this record ?');"><i
                                         class="fa fa-trash" aria-hidden="true"></i></a>
                 </td>

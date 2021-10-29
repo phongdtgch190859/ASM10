@@ -16,8 +16,11 @@ app.use(express.static('public'))
 app.use('/img', express.static(__dirname + 'public/images'))
 
 
-
-app.post('/update', async (req, res) => {
+app.get('/update/:id', async (req, res) => {
+    var result = await getAll("Products")
+    res.render('edit', { products: result })
+})
+app.post('/update/:id', async (req, res) => {
     const id = req.body.txtId
     const name = req.body.txtName
     const category = req.body.txtCategory

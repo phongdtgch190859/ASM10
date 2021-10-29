@@ -170,7 +170,7 @@
                 <td>
                     <a href="/edit/{{_id}}">Edit</a>
                 </td>
-                <td> <a onclick="return confirm('Are your sure?')" href="/delete/{{_id}}"> delete</a></td>
+                <td> <a onclick="return confirm('Are your sure? to want to delete product ID:{{_id}}')" href="/delete/{{_id}}"> delete</a></td>
             </tr>
             {{/each}}
         </table>

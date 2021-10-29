@@ -1,5 +1,5 @@
 const express = require('express')
-const { insertToDB, getAll, deleteObject, getDocumentById, updateDocument, findProductsByCategory, findProductsByProductName, checkPrice} = require('./databaseHandler')
+const { insertToDB, getAll, deleteObject, getDocumentById, updateDocument, findProductsByCategory, findProductsByProductName, checkRangeOfNumber } = require('./databaseHandler')
 const app = express()
 
 app.set('view engine', 'hbs')
@@ -22,25 +22,48 @@ app.post('/update', async (req, res) => {
     const price = req.body.txtPrice
     const url = req.body.txtURL
     let updateValues = { $set: { name: name, price: price, cat: category, picURL: url } };
-    //Kieemr  tra gia tri price 
-    let error = await checkPrice(10,30,price);
-    if (error != ""){
+
+    // //Kiểm tra tên sản phẩm
+    // if(name ==""){
+    //     let product = {};
+    //     product._id = id;
+    //     product.price = price;
+    //     product.picURL = url;
+    //     res.render('edit', {product, nameErr: 'Please Enter Product Name!' })
+    //     return;
+    // }
+    // //Kiểm tra number có nằm trong khoảng giá trị
+    let error = await checkRangeOfNumber(0,100000,price);
+    if(error != ""){
         let product = {};
         product._id = id;
         product.name = name;
         product.picURL = url;
-        res.render('edit', {product, priceErr: error});
+        res.render('edit',{product, priceErr: error });
         return;
     }
+
     //Kiểm tra URL có để trống.
-    // if(price == ""){
-    //     let product = {};
-    //     product._id = id;
-    //     product.name = name;
-    //     product.price = price;
-    //     res.render('edit', {product, picError: 'Please Enter URL!' })
-    //    return;
-    // }
+    if(url == ""){
+        let product = {};
+        product._id = id;
+        product.name = name;
+        product.price = price;
+        res.render('edit', {product, picError: 'Please Enter URL!' })
+       return;
+    }
+    //Kiểm tra xem url có kết thúc bằng đuôi .png
+    // console.log("Check png")
+    // console.log(url.endsWith('png'))
+
+    if (url.endsWith('.png')==false) {
+        let product = {};
+        product._id = id;
+        product.name = name;
+        product.price = price;
+        res.render('edit', {product, picError: 'The image was not png file!' })
+        return;
+    } 
     else {
         await updateDocument(id, updateValues, "Products")
         res.redirect('/')
@@ -54,18 +77,10 @@ app.get('/edit/:id', async (req, res) => {
     res.render("edit", { product: productToEdit })
 })
 
-// ngay thang 
-function formatDate(date){
-    return new Date(date).toLocaleString("vi-VN")
-}
-
 app.get('/', async (req, res) => {
     var result = await getAll("Products")
-    var time = new Date().toISOString()
-    console.log(time)
-    res.render('home', { products: result, now: time})
+    res.render('home', { products: result })
 })
-
 
 app.get('/allproducts', async (req, res) => {
     var all = await getAll("Products")
@@ -93,7 +108,7 @@ app.post('/insert', async (req, res) => {
         res.render('home', { products: result, picError: 'Phai nhap Picture!' })
     } else {
         //xay dung doi tuong insert
-        const obj = { name: name, price: price, picURL: url, cat: category}
+        const obj = { name: name, price: price, picURL: url, cat: category }
         //goi ham de insert vao DB
         await insertToDB(obj, "Products")
         res.redirect('/')
@@ -133,50 +148,4 @@ app.post('/searchByProductName', async (req, res) => {
 const PORT = process.env.PORT || 5000
 app.listen(PORT)
 console.log('Server is running!')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

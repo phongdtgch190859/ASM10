@@ -15,11 +15,14 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 app.use(express.static('public'))
 app.use('/img', express.static(__dirname + 'public/images'))
 
-
 app.get('/update/:id', async (req, res) => {
-    var result = await getAll("Products")
-    res.render('edit', { products: result })
+    const idValue = req.params.id
+    //lay thong tin cu cua sp cho nguoi dung xem, sua
+    const productToEdit = await getDocumentById(idValue, "Products")
+    //hien thi ra de sua
+    res.render("edit", { product: productToEdit })
 })
+
 app.post('/update/:id', async (req, res) => {
     const id = req.body.txtId
     const name = req.body.txtName
@@ -74,13 +77,7 @@ app.post('/update/:id', async (req, res) => {
         res.redirect('/')
     }})
 
-app.get('/edit/:id', async (req, res) => {
-    const idValue = req.params.id
-    //lay thong tin cu cua sp cho nguoi dung xem, sua
-    const productToEdit = await getDocumentById(idValue, "Products")
-    //hien thi ra de sua
-    res.render("edit", { product: productToEdit })
-})
+
 
 app.get('/', async (req, res) => {
     var result = await getAll("Products")
@@ -113,8 +110,8 @@ app.post('/create', async (req, res) => {
     const price = req.body.txtPrice
     const url = req.body.txtURL;
     if (url.length == 0) {
-        var result = await getAll("Products")
-        res.render('home', { products: result, picError: 'Phai nhap Picture!' })
+        
+        res.render('create', { products:req.body, picError: 'Phai nhap Picture!' })
     } else {
         //xay dung doi tuong insert
         const obj = { name: name, price: price, picURL: url, cat: category }
@@ -143,7 +140,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/searchByProductName', async (req, res) => {
-    const name = req.body.txtName
+    const name = req.body.name
     console.log('Product name: ', name)
     if (name == "") {
         var result = await getAll("Products")

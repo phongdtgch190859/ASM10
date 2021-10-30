@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
    
 </head>
+<style>
+h3 {
+       color: red;
+}
+</style>
 <body>
      <div class="app">
        <header>
@@ -43,6 +48,7 @@
                         <input class="form-control mr-sm-2" type="text" name="name"  id="search-input"  placeholder="Search here">
                         <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
                     </form>
+                   
                     <div class="cart ml-4">
                         <i class="fas fa-shopping-cart"></i>
                         <sub>2</sub>
@@ -50,7 +56,9 @@
                 </div>
             </div>
         </nav>
+       
     </div>
+      <h3 style="text-align:center;">{{err}}</h3>
 </header>
         <div class="container">
          

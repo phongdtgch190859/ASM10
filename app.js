@@ -111,7 +111,7 @@ app.post('/create', async (req, res) => {
     const url = req.body.txtURL;
     if (url.length == 0) {
         
-        res.render('create', { products:req.body, picError: 'Phai nhap Picture!' })
+        res.render('create', { name: name, price: price, cat: category, picError: 'URl require!' })
     } else {
         //xay dung doi tuong insert
         const obj = { name: name, price: price, picURL: url, cat: category }
@@ -144,7 +144,7 @@ app.post('/searchByProductName', async (req, res) => {
     console.log('Product name: ', name)
     if (name == "") {
         var result = await getAll("Products")
-        res.render('home', { products: result })
+        res.render('home', { products: result, err:"Please input value!!!" })
     } else {
         var result = await findProductsByProductName(name)
         res.render('home', { products: result })

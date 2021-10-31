@@ -1,7 +1,7 @@
 const {MongoClient,ObjectId} = require('mongodb')
 
-const DATABASE_URL = 'mongodb+srv://thanhbinh2001:123456789abc@cluster0.spshl.mongodb.net'
-const DATABASE_NAME = 'Bin_Shop'
+const DATABASE_URL = 'mongodb+srv://DoThanhPhong:123456789abc@cluster0.e1blu.mongodb.net'
+const DATABASE_NAME = 'thanhphong'
 
 async function updateDocument(id, updateValues,collectionName){
     const dbo = await getDatabase();

@@ -109,8 +109,11 @@ app.post('/create', async (req, res) => {
     const category = req.body.txtCategory;
     const price = req.body.txtPrice
     const url = req.body.txtURL;
-    if (url.length == 0) {
-        
+    if(!url.endsWith('jpg')||!url.endsWith('png')){
+        console.log(url.endsWith('jpg'))
+        res.render('create', { name: name, price: price, cat: category, picErr: 'Wrong image format' })
+    }
+    else if (url.length == 0) {
         res.render('create', { name: name, price: price, cat: category, picError: 'URl require!' })
     } else {
         //xay dung doi tuong insert

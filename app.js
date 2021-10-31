@@ -109,13 +109,14 @@ app.post('/create', async (req, res) => {
     const category = req.body.txtCategory;
     const price = req.body.txtPrice
     const url = req.body.txtURL;
-    if(!url.endsWith('jpg')||!url.endsWith('png')){
-        console.log(url.endsWith('jpg'))
-        res.render('create', { name: name, price: price, cat: category, picErr: 'Wrong image format' })
+  
+    if (name.length == 0) {
+        res.render('create', { name: name, price: price, cat: category, picError: 'name require!' })
     }
-    else if (name.length == 0) {
-        res.render('create', { name: name, price: price, cat: category, picError: 'URl require!' })
-    } else {
+    else if (isNaN(price)) {
+        res.render('create', { name: name, price: price, cat: category, picEr: 'price is not number' })
+    } 
+    else {
         //xay dung doi tuong insert
         const obj = { name: name, price: price, picURL: url, cat: category }
         //goi ham de insert vao DB
